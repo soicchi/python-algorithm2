@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  web:
+    image: python:slim
+    working_dir: /app
+    container_name: python
+    volumes:
+      - ./:/app
