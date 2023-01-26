@@ -32,6 +32,62 @@ class Sort:
 
         return nums
 
+    def quick_sort(self, nums: list[int]) -> list[int]:
+        self._quick_sort(nums, 0, len(nums)-1)
+
+        return nums
+
+    def _quick_sort(self, nums: list[int], low: int, high: int) -> None:
+        if low < high:
+            partition_index = self._partition(nums, low, high)
+            self._quick_sort(nums, low, partition_index-1)
+            self._quick_sort(nums, partition_index+1, high)
+
+    def _partition(self, nums: list[int], low: int, high: int) -> int:
+        i = low - 1
+        pivot = nums[high]
+        for j in range(len(nums) - 1):
+            if nums[j] < pivot:
+                i += 1
+                nums[j], nums[i] = nums[i], nums[j]
+        nums[i+1], nums[high] = nums[i+1], nums[high]
+
+        return i+1
+
+    def merge_sort(self, nums: list[int]) -> list[int]:
+        len_nums = len(nums)
+        if len_nums == 1:
+            return nums
+
+        center = len(nums) // 2
+        left = nums[:center]
+        right = nums[center:]
+
+        self.merge_sort(left)
+        self.merge_sort(right)
+
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                nums[k] = left[i]
+                i += 1
+            else:
+                nums[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            nums[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            nums[k] = right[j]
+            j += 1
+            k += 1
+
+        return nums
+
 
 if __name__ == "__main__":
     import random
@@ -40,3 +96,5 @@ if __name__ == "__main__":
     print(sort.bubble_sort(nums))
     print(sort.selection_sort(nums))
     print(sort.insertion_sort(nums))
+    print(sort.quick_sort(nums))
+    print(sort.merge_sort(nums))
