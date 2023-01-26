@@ -56,7 +56,7 @@ class Sort:
 
     def merge_sort(self, nums: list[int]) -> list[int]:
         len_nums = len(nums)
-        if len_nums == 1:
+        if len_nums <= 1:
             return nums
 
         center = len(nums) // 2
@@ -68,7 +68,7 @@ class Sort:
 
         i = j = k = 0
         while i < len(left) and j < len(right):
-            if left[i] < right[j]:
+            if left[i] <= right[j]:
                 nums[k] = left[i]
                 i += 1
             else:
