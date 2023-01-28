@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Optional
 
 
 class Node:
@@ -76,20 +77,52 @@ class LinkedList:
 
         self.head = _reverse_recursive(self.head, None)
 
+    # interview quiz
+    def reverse_even(self) -> None:
+        # 1, 4, 6, 8, 9 => 1, 8, 6, 4, 9
+        # 1, 4, 6, 8, 9, 1, 4, 6, 8, 9 => 1, 8, 6, 4, 9, 1, 8, 6, 4, 9
+        def _reverse_even(head: Node, previous_node: Node) -> Optional[Node]:
+            if head is None:
+                return None
+
+            current_node = head
+            while current_node and current_node.data % 2 == 0:
+                next_node = current_node.next
+                current_node.next = previous_node
+                previous_node = current_node
+                current_node = next_node
+
+            if current_node != head:
+                head.next = current_node
+                _reverse_even(current_node, None)
+                return previous_node
+
+            head.next = _reverse_even(head.next, head)
+            return head
+
+        self.head = _reverse_even(self.head, None)
+
 
 if __name__ == "__main__":
     linked_list = LinkedList()
     linked_list.append(1)
     linked_list.append(2)
-    linked_list.insert(0)
+    linked_list.append(4)
+    linked_list.append(6)
     linked_list.append(3)
+    linked_list.append(2)
+    linked_list.append(4)
+    linked_list.append(6)
     linked_list.print()
+    # print("###########")
+    # linked_list.remove(0)
+    # linked_list.print()
+    # print("###########")
+    # linked_list.reverse()
+    # linked_list.print()
+    # print("###########")
+    # linked_list.reverse_recursive()
+    # linked_list.print()
     print("###########")
-    linked_list.remove(0)
-    linked_list.print()
-    print("###########")
-    linked_list.reverse()
-    linked_list.print()
-    print("###########")
-    linked_list.reverse_recursive()
+    linked_list.reverse_even()
     linked_list.print()
