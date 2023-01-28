@@ -77,7 +77,7 @@ class LinkedList:
 
         self.head = _reverse_recursive(self.head, None)
 
-    # interview quiz
+    # interview quiz(要復習)
     def reverse_even(self) -> None:
         # 1, 4, 6, 8, 9 => 1, 8, 6, 4, 9
         # 1, 4, 6, 8, 9, 1, 4, 6, 8, 9 => 1, 8, 6, 4, 9, 1, 8, 6, 4, 9
