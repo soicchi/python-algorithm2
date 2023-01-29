@@ -1,12 +1,15 @@
+from __future__ import annotations
+
+
 class Node:
-    def __init__(self, data: any, next_node: any = None) -> None:
+    def __init__(self, data: any, next_node: Node = None) -> None:
         self.data = data
         self.next = next_node
 
 
 class LinkedList:
-    def __init__(self) -> None:
-        self.head = None
+    def __init__(self, head: Node = None) -> None:
+        self.head = head
 
     def append(self, data: any) -> None:
         new_node = Node(data)
@@ -48,6 +51,31 @@ class LinkedList:
         previous_node.next = current_node.next
         current_node = None
 
+    def reverse(self) -> None:
+        current_node = self.head
+        previous_node = None
+        while current_node:
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+
+        self.head = previous_node
+
+    def reverse_recursive(self) -> None:
+        def _reverse(current_node, previous_node) -> Node:
+            if not current_node:
+                return previous_node
+
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+            return _reverse(current_node, previous_node)
+
+        previous_node = _reverse(self.head, None)
+        self.head = previous_node
+
 
 if __name__ == "__main__":
     l = LinkedList()
@@ -57,5 +85,5 @@ if __name__ == "__main__":
     l.insert(0)
     l.print()
     print("#############")
-    l.remove(3)
+    l.reverse_recursive()
     l.print()
