@@ -53,6 +53,43 @@ class Sort:
 
         return i+1
 
+    def merge_sort(self, nums: list[int]) -> list[int]:
+        len_nums = len(nums)
+        if len_nums <= 1:
+            return nums
+
+        center = len_nums // 2
+        left = nums[:center]
+        right = nums[center:]
+
+        self.merge_sort(left)
+        self.merge_sort(right)
+
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                nums[k] = left[i]
+                i += 1
+                k += 1
+                continue
+
+            nums[k] = nums[j]
+            j += 1
+            k += 1
+
+        while i < len(left):
+            nums[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            nums[k] = right[j]
+            j += 1
+            k += 1
+
+        return nums
+
+
 if __name__ == "__main__":
     import random
     nums = [random.randint(0, 1000) for _ in range(10)]
@@ -61,3 +98,4 @@ if __name__ == "__main__":
     print(sort.selection_sort(nums))
     print(sort.insertion_sort(nums))
     print(sort.quick_sort(nums))
+    print(sort.merge_sort(nums))
