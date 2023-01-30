@@ -41,6 +41,38 @@ class DoublyLinkedList:
         self.head.prev = new_node
         self.head = new_node
 
+    def remove(self, data: any) -> None:
+        current_node = self.head
+        if current_node and current_node.data == data:
+            if current_node.next is None:
+                self.head = current_node.next
+                current_node = None
+                return
+
+            next_node = current_node.next
+            self.head = next_node
+            next_node.prev = None
+            current_node = None
+            return
+
+        while current_node and current_node.data != data:
+            previous_node = current_node
+            current_node = current_node.next
+
+        if current_node is None:
+            return
+
+        previous_node = current_node.prev
+        if current_node.next is None:
+            previous_node.next = None
+            current_node = None
+            return
+
+        next_node = current_node.next
+        previous_node.next = next_node
+        next_node.prev = previous_node
+        current_node = None
+
 
 if __name__ == "__main__":
     d = DoublyLinkedList()
@@ -48,4 +80,7 @@ if __name__ == "__main__":
     d.append(2)
     d.append(3)
     d.insert(0)
+    d.print()
+    print("############")
+    d.remove(3)
     d.print()
