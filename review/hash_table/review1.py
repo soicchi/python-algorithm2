@@ -24,10 +24,16 @@ class HashTable:
             if data[0] == key:
                 return data[1]
 
+    def __setitem__(self, key: str, value: any) -> None:
+        self.add(key, value)
+
+    def __getitem__(self, key: str) -> any:
+        return self.get(key)
+
 
 if __name__ == "__main__":
     h = HashTable()
-    h.add("car", "Tesla")
-    h.add("car", "Toyota")
+    h["car"] = "Tesla"
+    h["car"] = "Toyota"
     print(h.table)
-    print(h.get("car"))
+    print(h["car"])
