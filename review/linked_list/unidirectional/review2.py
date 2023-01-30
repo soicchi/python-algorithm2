@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Optional
 
 
 class Node:
@@ -84,9 +85,13 @@ if __name__ == "__main__":
     l = LinkedList()
     l.append(1)
     l.append(2)
-    l.append(3)
-    l.insert(0)
+    l.append(4)
+    l.append(6)
+    l.append(7)
+    l.append(2)
+    l.append(4)
+    l.append(6)
     l.print()
     print("#############")
-    l.reverse_recursive()
+    l.reverse_even()
     l.print()
