@@ -23,6 +23,7 @@ class LinkedList:
             current_node = current_node.next
 
         current_node.next = new_node
+        new_node.prev = current_node
 
     def insert(self, data: any) -> None:
         new_node = Node(data)
