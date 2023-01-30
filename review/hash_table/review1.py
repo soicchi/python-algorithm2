@@ -18,9 +18,16 @@ class HashTable:
 
         self.table[index].append([key, value])
 
+    def get(self, key: str) -> any:
+        index = self.hash(key)
+        for data in self.table[index]:
+            if data[0] == key:
+                return data[1]
+
 
 if __name__ == "__main__":
     h = HashTable()
     h.add("car", "Tesla")
     h.add("car", "Toyota")
     print(h.table)
+    print(h.get("car"))
