@@ -34,6 +34,24 @@ class LinkedList:
         new_node.next = self.head
         self.head = new_node
 
+    def remove(self, data: any) -> None:
+        current_node = self.head
+        if current_node and current_node.data == data:
+            self.head = current_node.next
+            current_node = None
+            return
+
+        previous_node = None
+        while current_node and current_node.data != data:
+            previous_node = current_node
+            current_node = current_node.next
+
+        if current_node is None:
+            return
+
+        previous_node.next = current_node.next
+        current_node = None
+
 
 if __name__ == "__main__":
     l = LinkedList()
@@ -41,4 +59,7 @@ if __name__ == "__main__":
     l.append(2)
     l.append(3)
     l.insert(0)
+    l.print()
+    print("#############")
+    l.remove(3)
     l.print()
